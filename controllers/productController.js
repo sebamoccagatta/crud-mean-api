@@ -18,3 +18,17 @@ exports.createProduct = async (req, res) => {
         res.status(500).send('Hubo un error');
     }
 }
+
+exports.getProducts = async (req, res) => {
+
+    try {
+
+        const products =  await Product.find();
+
+        res.json(products);
+        
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Hubo un error');
+    }
+}
