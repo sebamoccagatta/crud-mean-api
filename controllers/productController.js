@@ -70,3 +70,19 @@ exports.showProduct = async (req, res) => {
         res.status(500).send('Hubo un error');
     }
 }
+
+exports.deleteProduct = async (req, res) => {
+    try {
+        const {name, category, locate, price} = req.body;
+        let product =  await Product.findById(req.params.id);
+
+        if(!product)
+            res.status(404).json({message: 'No existe el Producto'});
+
+        await Product.findOneAndDelete({_id: req.params.id})
+        res.json({message: 'Producto eliminado correctamente'});
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Hubo un error');
+    }
+}
